@@ -13,32 +13,81 @@ var retireDate: Date?
 
 class ViewController: UIViewController, UITextFieldDelegate{
     
-    @IBOutlet weak var TimeView: UIView! {
-        didSet{
+    @IBOutlet weak var TimeView: UIView!
+    @IBOutlet weak var BackView: UIView! {
+        didSet {
+            let gradientLayer = CAGradientLayer()
+            gradientLayer.frame = BackView.bounds
+            gradientLayer.colors = [CGColor(srgbRed: 54/255, green: 0/255, blue: 51/255, alpha: 1), CGColor(srgbRed: 11/255, green: 135/255, blue: 147/255, alpha: 1)]
+            BackView.layer.insertSublayer(gradientLayer, at: 0)
+            BackView.layer.cornerRadius = 20
+        }
+    }
+    
+    @IBOutlet weak var chColor1: UIButton! {
+        didSet {
             
             let gradient = CAGradientLayer()
-
-            gradient.frame = TimeView.bounds
-            gradient.colors = [UIColor.systemPink.cgColor, UIColor.purple.cgColor]
-
-            TimeView.layer.insertSublayer(gradient, at: 0)
-            TimeView.layer.cornerRadius = 20
             
-
-//            TimeView.layer.borderWidth = 3
-//            TimeView.layer.borderColor = UIColor.white.cgColor
+            gradient.frame = chColor1.bounds
+            gradient.colors = [CGColor(srgbRed: 54/255, green: 0/255, blue: 51/255, alpha: 1), CGColor(srgbRed: 11/255, green: 135/255, blue: 147/255, alpha: 1)]
+            chColor1.layer.insertSublayer(gradient, at: 0)
+            chColor1.layer.cornerRadius = 10
             
             
         }
     }
+    
+    @IBOutlet weak var chColor2: UIButton! {
+        didSet {
+            let gradient = CAGradientLayer()
+            
+            gradient.frame = chColor2.bounds
+            gradient.colors = [CGColor(srgbRed: 255/255, green: 0/255, blue: 204/255, alpha: 1), CGColor(srgbRed: 51/255, green: 51/255, blue: 153/255, alpha: 1)]
+            chColor2.layer.insertSublayer(gradient, at: 0)
+            chColor2.layer.cornerRadius = 10
+        }
+    }
+    
     @IBOutlet weak var chColor: UIButton! {
         didSet {
             let gradient = CAGradientLayer()
-
+            
             gradient.frame = chColor.bounds
-            gradient.colors = [UIColor.blue.cgColor, UIColor.purple.cgColor]
+            gradient.colors = [CGColor(srgbRed: 135/255, green: 0/255, blue: 0/255, alpha: 1), CGColor(srgbRed: 25/255, green: 10/255, blue: 5/255, alpha: 1)]
             chColor.layer.insertSublayer(gradient, at: 0)
             chColor.layer.cornerRadius = 10
+        }
+    }
+    
+    @IBOutlet weak var chColor3: UIButton! {
+        didSet {
+            let gradient = CAGradientLayer()
+            
+            gradient.frame = chColor3.bounds
+            gradient.colors = [CGColor(srgbRed: 255/255, green: 81/255, blue: 47/255, alpha: 1), CGColor(srgbRed: 221/255, green: 36/255, blue: 118/255, alpha: 1)]
+            chColor3.layer.insertSublayer(gradient, at: 0)
+            chColor3.layer.cornerRadius = 10
+        }
+    }
+    @IBOutlet weak var chColor4: UIButton! {
+        didSet {
+            let gradient = CAGradientLayer()
+            
+            gradient.frame = chColor4.bounds
+            gradient.colors = [CGColor(srgbRed: 39/255, green: 116/255, blue: 174/255, alpha: 1), CGColor(srgbRed: 0/255, green: 46/255, blue: 93/255, alpha: 1)]
+            chColor4.layer.insertSublayer(gradient, at: 0)
+            chColor4.layer.cornerRadius = 10
+        }
+    }
+    @IBOutlet weak var chColor5: UIButton! {
+        didSet {
+            let gradient = CAGradientLayer()
+            
+            gradient.frame = chColor5.bounds
+            gradient.colors = [CGColor(srgbRed: 71/255, green: 118/255, blue: 230/255, alpha: 1), CGColor(srgbRed: 142/255, green: 84/255, blue: 233/255, alpha: 1)]
+            chColor5.layer.insertSublayer(gradient, at: 0)
+            chColor5.layer.cornerRadius = 10
         }
     }
     
@@ -74,11 +123,12 @@ class ViewController: UIViewController, UITextFieldDelegate{
     
     
     var timer: Timer?
- 
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
+        
         self.dateTFFF.delegate = self
         dateTFFF.endEditing(true)
         let datePicker = UIDatePicker()
@@ -109,7 +159,8 @@ class ViewController: UIViewController, UITextFieldDelegate{
         dateMth.inputAccessoryView = toolBar
         dateHrs.inputAccessoryView = toolBar
         
-    
+//        remove()
+        
         
     }
     
@@ -120,7 +171,7 @@ class ViewController: UIViewController, UITextFieldDelegate{
         
         timer = Timer.scheduledTimer(withTimeInterval: 1, repeats: true) { (_) in
             
-             //            let now = Date()
+            //            let now = Date()
             let formatter = DateFormatter()
             formatter.dateFormat = "yyyy MM dd HH"
             if retireDate != nil {
@@ -164,16 +215,63 @@ class ViewController: UIViewController, UITextFieldDelegate{
         }
         
     }
+    
+    @IBAction func ColorPressed02(_ sender: UIButton) {
+        
+        add(C1: CGColor(srgbRed: 54/255, green: 0/255, blue: 51/255, alpha: 1), C2: CGColor(srgbRed: 11/255, green: 135/255, blue: 147/255, alpha: 1))
+        print("Te")
+    }
+    
+    @IBAction func ColorPressed01(_ sender: UIButton) {
+        
+        add(C1: CGColor(srgbRed: 255/255, green: 0/255, blue: 204/255, alpha: 1), C2: CGColor(srgbRed: 51/255, green: 51/255, blue: 153/255, alpha: 1))
+        
+        print("Text1")
+        
+    }
+    
+    
     @IBAction func chColorPressed(_ sender: UIButton) {
         
-//        self.TimeView.layer.backgroundColor = UIColor.black.cgColor
-        let gradient = CAGradientLayer()
-
-        gradient.frame = self.TimeView.bounds
-        gradient.colors = [UIColor.blue.cgColor, UIColor.purple.cgColor]
-
-        self.TimeView.layer.insertSublayer(gradient, at: 1)
+        add(C1: CGColor(srgbRed: 135/255, green: 0/255, blue: 0/255, alpha: 1), C2: CGColor(srgbRed: 25/255, green: 10/255, blue: 5/255, alpha: 1))
+        print("Text2")
+        
     }
+    @IBAction func chColorPressed04(_ sender: UIButton) {
+        add(C1: CGColor(srgbRed: 255/255, green: 81/255, blue: 47/255, alpha: 1), C2: CGColor(srgbRed: 221/255, green: 36/255, blue: 118/255, alpha: 1))
+    }
+    @IBAction func chColorPressed05(_ sender: UIButton) {
+        add(C1: CGColor(srgbRed: 39/255, green: 116/255, blue: 174/255, alpha: 1), C2: CGColor(srgbRed: 0/255, green: 46/255, blue: 93/255, alpha: 1))
+    }
+    
+    @IBAction func chColorPressed06(_ sender: UIButton) {
+        add(C1: CGColor(srgbRed: 71/255, green: 118/255, blue: 230/255, alpha: 1), C2: CGColor(srgbRed: 142/255, green: 84/255, blue: 233/255, alpha: 1))
+    }
+    
+    
+    func setupGradientBackground(C1: CGColor, C2: CGColor, n1: Int) {
+        let gradientLayer = CAGradientLayer()
+        gradientLayer.frame = self.TimeView.bounds
+        gradientLayer.colors = [C1, C2]
+        self.TimeView.layer.insertSublayer(gradientLayer, at: 0)
+        self.TimeView.layer.cornerRadius = 20
+        
+    }
+    
+//    var squareLayers = [CAGradientLayer]()
+    
+    func add(C1: CGColor, C2: CGColor) {
+        let gradientLayer = CAGradientLayer()
+        gradientLayer.frame = BackView.bounds
+        gradientLayer.colors = [C1, C2]
+        BackView.layer.addSublayer(gradientLayer)
+//        squareLayers.append(gradientLayer)
+        BackView.layer.cornerRadius = 20
+        
+    }
+    
+
+    
     
     override func viewDidDisappear(_ animated: Bool) {
         if timer != nil {
